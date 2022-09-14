@@ -1,9 +1,11 @@
 #! /usr/bin/env python3
+import sys
+from PyQt6.QtWidgets import QApplication
+import Interface
+from Interface import Window
 
-from AlignClass import Align_Class
+app = QApplication(sys.argv)
+window = Window()
+window.show()
+sys.exit(app.exec())
 
-graph = Align_Class("test.fasta", 0)
-graph.FastaDic()
-graph.MakeSeqList()
-graph.MakeHeadList()
-graph.Make_Graph()
