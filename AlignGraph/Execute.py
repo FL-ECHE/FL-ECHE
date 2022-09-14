@@ -4,6 +4,8 @@ from PyQt6.QtWidgets import QApplication
 import Interface
 from Interface import Window
 
+
+#app launch
 app = QApplication(sys.argv)
 window = Window()
 window.show()

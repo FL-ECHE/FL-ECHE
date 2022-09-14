@@ -15,6 +15,9 @@ class Align_Class:
         self.threshold = threshold
 
     def FastaDic(self):
+        '''
+        Extract headers and sequences and put them together in a dictionnary 
+        '''
         FileName = open(self.filename,'r')
         self.fastaDict = {}
         for line in FileName:
@@ -30,17 +33,28 @@ class Align_Class:
         return self.fastaDict
 
     def MakeSeqList(self):
+        '''
+        Extrac each sequence 
+        '''
         self.SeqList = [val for val in self.fastaDict.values()]
 
     def MakeHeadList(self):
+        '''
+        Extract header for each sequence 
+        '''
         self.HeadList = [header for header in self.fastaDict.keys()]
 
     def Make_Graph(self):
-        tuple=()
+        '''
+        Calculates the score for each pair of sequences and builds the graph depending on it,
+        and then proceeds to showit.
+        '''
+
+        #tuple=()
         score_align=0
         ScoreNoeud = []
         
-        # add nodes + add edged
+        # add nodes + add edges by going through the created lists
         self.GraphSeq = nx.Graph()
         for i in range(len(self.HeadList)):
             scorelist = []
@@ -52,6 +66,9 @@ class Align_Class:
                 if (score_align>self.threshold):
                     self.GraphSeq.add_edge(self.HeadList[i],self.HeadList[j],weight = score_align)
             ScoreNoeud.append(sum(scorelist))
+
+        #The values can be close to each other, so for better comprehension
+        #we decided to create a dynamic range for color and width purposes.
         weights = nx.get_edge_attributes(self.GraphSeq,'weight').values()
         maxou = max(list(weights))
         minou = min(list(weights))
@@ -63,14 +80,14 @@ class Align_Class:
         pos = nx.spring_layout(self.GraphSeq)
         
         
-        #with_labels=True
-        nx.draw(self.GraphSeq, pos, width=weights, edge_color = weights, edge_cmap=plt.cm.magma, node_color=ScoreNoeud, cmap=plt.cm.magma)
+        #with_labels=True if you want node name
+        nx.draw(self.GraphSeq, pos, with_labels = True, width=weights, edge_color = weights, edge_cmap=plt.cm.magma, node_color=ScoreNoeud, cmap=plt.cm.magma)
         
-        #afficher les valeurs de score sur les arcs
+        #Show values on edges
         edge_labels = nx.get_edge_attributes(self.GraphSeq,'weight')
         nx.draw_networkx_edge_labels(self.GraphSeq, pos, edge_labels = edge_labels)
         
-        #afficher le nom des noeuds, manque l'attribut
+        #Show node name or attribute, work in progress
         #node_labels = nx.get_node_attributes(self.GraphSeq,'state')
         #nx.draw_networkx_labels(self.GraphSeq, pos, labels = node_labels)
         
