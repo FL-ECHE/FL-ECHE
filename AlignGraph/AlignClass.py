@@ -23,9 +23,9 @@ class Align_Class:
         for line in FileName:
             if line[0]=='>':
                 header = line[1:]
-                print(header)
+                #print(header)
                 #header = header[:25]
-                print(header+'\n'+'\n')
+                #print(header+'\n'+'\n')
                 self.fastaDict[header]=''
             else:
                 self.fastaDict[header]+=line.rstrip()
