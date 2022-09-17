@@ -20,7 +20,9 @@ class Window(QWidget):
         layout.addWidget(filen,1,0)
         thr = QLabel("Threshold :")
         layout.addWidget(thr,2,0)
-        
+        rdm = QLabel("If you wish to use random sequences :")
+        layout.addWidget(rdm,4,0)
+
         #Setting up inputs
         self.input1 = QFileDialog()
         #layout.addWidget(self.input1, 1,1)
