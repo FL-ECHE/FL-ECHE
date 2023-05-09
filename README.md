@@ -1,6 +1,7 @@
 - 👋 Hi, I’m FLECHE 
-- M.Sc. student in bioinformatics
+- M.Sc. in bioinformatics
 - C++
-- Python - Biopython / Django
+- Python
+- Bash
 - 📫 How to reach me : twitter.com/FLECHE___
 
